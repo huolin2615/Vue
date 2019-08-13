@@ -1,21 +1,29 @@
 <template>
 <div>
 	<div class="banner" @click="handleBannerClick">
-			<img class="banner-img" src="http://img1.qunarzz.com/sight/p0/1907/8d/8da769b8a045ec98a3.img.jpg_350x240_c57e9179.jpg" />
+			<img class="banner-img" :src="bannerImg" />
 			<div class="banner-info">
-				<div class="banner-tittle">深圳欢乐谷(AAAAA景区)</div>
+				<div class="banner-tittle">{{this.sightName}}</div>
 				<div class="banner-number">
-					<span class="iconfont banner-icon">&#xe692;</span>55</div>
+					<span class="iconfont banner-icon">&#xe692;</span>{{this.bannerImg.length}}</div>
 			</div>
 	</div>
-	<common-gallary :imgs="imgs" v-show="showGallary" @close="handleGallaryClose"></common-gallary>
+	<animation>
+	<common-gallary :imgs="gallaryImgs" v-show="showGallary" @close="handleGallaryClose"></common-gallary>
+	</animation>
 </div>
 </template>
 
 <script>
 import CommonGallary from '@/common/gallary/Gallary'
+import Animation from '@/common/animation/Animation'
 export default {
 		name: 'DetailBanner',
+		props: {
+			sightName: String,
+			bannerImg: String,
+			gallaryImgs: Array
+		},
 		methods: {
 			handleBannerClick () {
 				this.showGallary = true
@@ -25,13 +33,12 @@ export default {
 			}
 		},
 		components: {
-			CommonGallary
+			CommonGallary,
+			Animation
 		},
     data () {
         return {
-					showGallary: false,
-					imgs: ['http://img1.qunarzz.com/sight/p0/1907/8d/8da769b8a045ec98a3.img.jpg_r_800x800_264910bc.jpg',
-									'http://img1.qunarzz.com/sight/p0/1907/b5/b50389ea88e2df42a3.water.jpg_r_800x800_05f5f385.jpg']
+					showGallary: false
         }
     }
 }
@@ -42,7 +49,7 @@ export default {
 		position: relative
 		overflow: hidden
 		height: 0
-		padding-bottom: 68%
+		padding-bottom: 55%
 		.banner-img
 			width: 100%
 		.banner-info
