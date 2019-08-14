@@ -29,7 +29,8 @@ export default {
 			sightName: '',
 			bannerImg: '',
 			gallaryImgs: [],
-			list: []
+			list: [],
+			lastDetail: ''
         }
 	},
 	methods: {
@@ -50,8 +51,15 @@ export default {
 		}
 	},
 	mounted () {
+		this.lastDetail = this.$route.params.id
 		this.getDetailInfo()
-	}
+	},
+	activated () {
+            if (this.lastDetail !== this.$route.params.id) {
+				this.lastDetail = this.$route.params.id
+                this.getDetailInfo()
+            }
+        }
 }
 </script>
 
